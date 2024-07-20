@@ -1,18 +1,17 @@
 from sqlalchemy import Column,Integer,String,Boolean,DateTime,ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime,timezone
+from utils.database import Base
 
-class Project:
+class Project(Base):
     __tablename__ = "projects"
 
     id = Column(Integer, primary_key=True)
     domain = Column(String,unique=True, index=True , nullable=True)
     is_active = Column(Boolean, default=True)
     account = relationship("Account",back_populates='project')
-    created_at = Column(DateTime,default=datetime(timezone))
-    updated_at = Column(DateTime)
 
-class Account:
+class Account(Base):
     __tablename__ = "accounts"
 
     id = Column(Integer, primary_key=True)
